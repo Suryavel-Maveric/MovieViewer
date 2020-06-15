@@ -34,17 +34,18 @@ class DetailFragment : BaseFragment() {
 
         arguments?.getString(ARG_TITLE_ID)?.let { titleId ->
             val viewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
+            showLoading()
             viewModel.getTitleDetail(titleId).observe(viewLifecycleOwner, Observer { titleDetail ->
-                setUp(titleDetail)
+                setData(titleDetail)
             })
         }
     }
 
-    private fun setUp(titleDetail: TitleDetail?) {
+    private fun setData(titleDetail: TitleDetail) {
         view?.let { rootView ->
-            titleDetail?.let {
-                DataBindingUtil.bind<FragmentDetailBinding>(rootView)?.titleDetail = titleDetail
-            }
+            DataBindingUtil.bind<FragmentDetailBinding>(rootView)?.titleDetail = titleDetail
+
         }
+        hideLoading()
     }
 }
