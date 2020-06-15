@@ -3,12 +3,12 @@ package io.github.xvelx.movieviewer.vm
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import io.github.xvelx.movieviewer.network.MvApi
 import io.github.xvelx.movieviewer.network.dto.TitleDetail
+import io.github.xvelx.movieviewer.util.addToDisposableBucket
 import io.reactivex.android.schedulers.AndroidSchedulers
 
-class DetailViewModel @ViewModelInject constructor(private val mvApi: MvApi) : ViewModel() {
+class DetailViewModel @ViewModelInject constructor(private val mvApi: MvApi) : BaseViewModel() {
 
     private val detailLiveData = MutableLiveData<TitleDetail>()
 
@@ -18,7 +18,7 @@ class DetailViewModel @ViewModelInject constructor(private val mvApi: MvApi) : V
                 detailLiveData.value = it
             }, {
                 println(it.localizedMessage)
-            })
+            }).addToDisposableBucket(this)
         return detailLiveData
     }
 }
