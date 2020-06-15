@@ -4,23 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="8dp"
+    android:padding="@dimen/container_padding"
     tools:context=".activities.SearchActivity">
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/searchContainer"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.65"
+            tools:background="#00FF00" />
+
+        <Spinner
+            android:id="@+id/searchType"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.35"
+            tools:background="#FF0000" />
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="@dimen/view_top_margin"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchView"
+        app:layout_constraintTop_toBottomOf="@id/searchContainer"
         app:spanCount="2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
