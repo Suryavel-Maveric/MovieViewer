@@ -1,6 +1,7 @@
 package io.github.xvelx.movieviewer.activities.adapter
 
 import android.view.View
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import io.github.xvelx.movieviewer.R
@@ -14,5 +15,9 @@ class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         Glide.with(itemView).load(item.posterUrl)
             .placeholder(R.drawable.place_holder_poster)
             .into(itemView.posterView)
+
+        itemView.setOnClickListener {
+            itemView.findNavController().navigate(R.id.detailFragment)
+        }
     }
 }
