@@ -25,6 +25,11 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="Search.Title" parent="Title">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="Detail">
         <item name="android:paddingStart">4dp</item>
     </style>
@@ -33,7 +38,6 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
     </style>
-    ¬
 
     <style name="Detail.Value">
         <item name="android:textColor">#FFFFFF</item>

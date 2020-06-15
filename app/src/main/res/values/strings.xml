@@ -2,6 +2,12 @@
     <string name="app_name">Movie Viewer</string>
 
     <string name="title_type_all">All</string>
+    <string name="genre">Genre</string>
+    <string name="running_time">Running Time</string>
+    <string name="imdb_rating">IMDB Rating</string>
+    <string name="plot">Plot</string>
+    <string name="actors">Actors</string>
+    <string name="writers">Writers</string>
 
     <string-array name="title_types">
         <item>@string/title_type_all</item>

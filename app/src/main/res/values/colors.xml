@@ -3,4 +3,10 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="item_search_background">#1b1b1b</color>
+    <color name="item_search_text_color">#FFFFFF</color>
+    <color name="search_screen_background_color">#424242</color>
+    <color name="search_filter_container_background_color">#eeeeee</color>
+    <color name="detail_screen_background_color">#424242</color>
+    <color name="detail_title_background_color">#585554</color>
 </resources>
