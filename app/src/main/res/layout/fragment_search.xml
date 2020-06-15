@@ -12,23 +12,23 @@
         android:id="@+id/searchContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#eeeeee"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
+            style="@android:style/Widget.Material.SearchView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.65"
-            tools:background="#00FF00" />
+            android:layout_weight="0.65" />
 
         <Spinner
             android:id="@+id/searchType"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.35"
-            tools:background="#FF0000" />
+            android:layout_weight="0.35" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
