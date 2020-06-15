@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -23,10 +22,12 @@ import io.github.xvelx.movieviewer.vm.SearchViewModel
 import kotlinx.android.synthetic.main.fragment_search.*
 
 @AndroidEntryPoint
-class SearchFragment : Fragment() {
+class SearchFragment : BaseFragment() {
 
     private var searchPagedLiveData: LiveData<PagedList<SearchItem>>? = null
     private lateinit var searchListAdapter: SearchListAdapter
+
+    override val screenTitle = getString(R.string.search_page_title)
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,11 +14,13 @@ import io.github.xvelx.movieviewer.network.dto.TitleDetail
 import io.github.xvelx.movieviewer.vm.DetailViewModel
 
 @AndroidEntryPoint
-class DetailFragment : Fragment() {
+class DetailFragment : BaseFragment() {
 
     companion object {
         const val ARG_TITLE_ID = "ARG_TITLE_ID"
     }
+
+    override val screenTitle = getString(R.string.detail_page_title)
 
     override fun onCreateView(
         inflater: LayoutInflater,

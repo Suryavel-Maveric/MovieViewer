@@ -8,6 +8,8 @@
     <string name="plot">Plot</string>
     <string name="actors">Actors</string>
     <string name="writers">Writers</string>
+    <string name="detail_page_title">Detail</string>
+    <string name="search_page_title">Search</string>
 
     <string-array name="title_types">
         <item>@string/title_type_all</item>
