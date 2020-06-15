@@ -5,6 +5,9 @@ import io.github.xvelx.movieviewer.network.MvApi
 import io.github.xvelx.movieviewer.network.dto.SearchItem
 import io.reactivex.android.schedulers.AndroidSchedulers
 
+/**
+ * Paged DataSource to fetch title list on-demand.
+ */
 class SearchDataSource(
     private val query: String,
     private val titleType: String,

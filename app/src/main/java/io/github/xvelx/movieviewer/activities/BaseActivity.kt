@@ -23,8 +23,7 @@ abstract class BaseActivity : AppCompatActivity() {
         setupActionBarWithNavController(navigationController, appBarConfiguration)
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        return navigationController.navigateUp()
-                || super.onSupportNavigateUp()
-    }
+    override fun onSupportNavigateUp() = navigationController.navigateUp()
+            || super.onSupportNavigateUp()
+
 }
