@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -12,7 +13,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
-import butterknife.OnItemSelected
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.xvelx.movieviewer.R
 import io.github.xvelx.movieviewer.activities.SearchType
@@ -26,8 +26,6 @@ import kotlinx.android.synthetic.main.fragment_search.*
 class SearchFragment : Fragment() {
 
     private var searchPagedLiveData: LiveData<PagedList<SearchItem>>? = null
-    private var searchQueryText: String? = null
-    private var searchTitleType: String? = null
     private lateinit var searchListAdapter: SearchListAdapter
 
     override fun onCreateView(
@@ -47,15 +45,23 @@ class SearchFragment : Fragment() {
             GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
         recyclerView.adapter = searchListAdapter
 
+        configureSearchView()
+
+        configureSearchTypeSlider()
+    }
+
+    private fun configureSearchView() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                onSearchQueryEntered(query)
+                searchTitle()
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean = true
         })
+    }
 
+    private fun configureSearchTypeSlider() {
         context?.let { ctxt ->
             searchType.adapter = ArrayAdapter(
                 ctxt,
@@ -64,39 +70,40 @@ class SearchFragment : Fragment() {
                 SearchType.values()
             )
         }
+        configureSliderListener()
     }
 
-    fun onSearchQueryEntered(query: String?) {
-        searchView.hideKeyboard()
-        searchQueryText = query
-        searchTitle(
-            searchQueryText,
-            searchTitleType
-        )
-    }
+    fun configureSliderListener() {
+        searchType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) = Unit
 
-    @OnItemSelected(R.id.searchType)
-    fun onTitleTypeSelected(position: Int) {
-        searchTitleType = (searchType.adapter.getItem(position) as? SearchType)?.searchText
-        searchTitle(
-            searchQueryText,
-            searchTitleType
-        )
-    }
-
-    fun searchTitle(query: String?, type: String?) {
-        query?.let {
-            val searchViewModel =
-                ViewModelProvider(this).get(SearchViewModel::class.java)
-
-            // New Live Data created for every search query
-            // So removing the registered observers
-            searchPagedLiveData?.removeObservers(this)
-            searchPagedLiveData =
-                searchViewModel.getSearchItemPagedList(it, type ?: "")
-            searchPagedLiveData?.observe(this, Observer {
-                searchListAdapter.submitList(it)
-            })
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                searchTitle()
+            }
         }
+    }
+
+    fun searchTitle() {
+        // Hide keyboard if it is opened
+        searchView.hideKeyboard()
+
+        val query = searchView.query
+        val titleType =
+            (searchType.adapter.getItem(searchType.selectedItemPosition) as? SearchType)?.searchText
+        val searchViewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
+
+        // New Live Data created for every search query
+        // So removing the registered observers
+        searchPagedLiveData?.removeObservers(this)
+        searchPagedLiveData =
+            searchViewModel.getSearchItemPagedList(query.toString(), titleType ?: "")
+        searchPagedLiveData?.observe(this, Observer {
+            searchListAdapter.submitList(it)
+        })
     }
 }

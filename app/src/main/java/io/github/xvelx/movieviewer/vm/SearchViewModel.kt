@@ -14,9 +14,15 @@ class SearchViewModel @ViewModelInject constructor(
 ) : ViewModel() {
 
     private var itemPagedList: LiveData<PagedList<SearchItem>>? = null
+    private var persistedQuery: String? = null
+    private var persistedType: String? = null
 
+    fun getSearchItemPagedList(query: String, titleType: String): LiveData<PagedList<SearchItem>>? {
+        if (shouldIgnoreNewSearch(query, titleType)) return itemPagedList
 
-    fun getSearchItemPagedList(query: String, titleType: String): LiveData<PagedList<SearchItem>> {
+        persistedQuery = query
+        persistedType = titleType
+
         val dataSourceFactory =
             SearchDataSourceFactory(
                 query,
@@ -31,4 +37,7 @@ class SearchViewModel @ViewModelInject constructor(
         ).build()
         return itemPagedList!!
     }
+
+    private fun shouldIgnoreNewSearch(query: String, titleType: String) =
+        query == persistedQuery && persistedType == titleType
 }
