@@ -10,4 +10,33 @@
         <item name="colorAccent">#a4a4a4</item>
     </style>
 
+
+    <style name="Title">
+        <item name="android:textColor">#CCCC00</item>
+    </style>
+
+    <style name="Title.Header">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Title.SubHeader">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Detail">
+        <item name="android:paddingStart">4dp</item>
+    </style>
+
+    <style name="Detail.Title" parent="Title">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    ¬
+
+    <style name="Detail.Value">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>

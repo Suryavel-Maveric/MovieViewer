@@ -1,10 +1,12 @@
 package io.github.xvelx.movieviewer.activities.adapter
 
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import io.github.xvelx.movieviewer.R
+import io.github.xvelx.movieviewer.fragments.DetailFragment
 import io.github.xvelx.movieviewer.network.dto.SearchItem
 import kotlinx.android.synthetic.main.view_search_item.view.*
 
@@ -17,7 +19,10 @@ class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             .into(itemView.posterView)
 
         itemView.setOnClickListener {
-            itemView.findNavController().navigate(R.id.detailFragment)
+            itemView.findNavController().navigate(
+                R.id.detailFragment,
+                bundleOf(DetailFragment.ARG_TITLE_ID to item.titleId)
+            )
         }
     }
 }
