@@ -17,7 +17,7 @@ class DetailViewModel @ViewModelInject constructor(private val mvApi: MvApi) : V
             .subscribe({
                 detailLiveData.value = it
             }, {
-                // TODO
+                println(it.localizedMessage)
             })
         return detailLiveData
     }

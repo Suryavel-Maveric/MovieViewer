@@ -30,7 +30,7 @@ data class TitleDetail(
     @JsonProperty("imdbVotes") val imdbVotes: String,
     @JsonProperty("imdbID") val titleId: String,
     @JsonProperty("Type") val type: String,
-    @JsonProperty("totalSeasons") val totalSeasons: Int,
+    @JsonProperty("totalSeasons") val totalSeasons: String,
     @JsonProperty("Response") val response: String
 //    @JsonProperty("Error") val error: String
 )

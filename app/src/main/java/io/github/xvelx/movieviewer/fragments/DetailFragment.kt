@@ -20,7 +20,8 @@ class DetailFragment : BaseFragment() {
         const val ARG_TITLE_ID = "ARG_TITLE_ID"
     }
 
-    override val screenTitle = getString(R.string.detail_page_title)
+    override val screenTitle
+        get() = getString(R.string.detail_page_title)
 
     override fun onCreateView(
         inflater: LayoutInflater,

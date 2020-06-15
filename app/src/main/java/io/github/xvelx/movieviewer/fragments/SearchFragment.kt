@@ -27,7 +27,8 @@ class SearchFragment : BaseFragment() {
     private var searchPagedLiveData: LiveData<PagedList<SearchItem>>? = null
     private lateinit var searchListAdapter: SearchListAdapter
 
-    override val screenTitle = getString(R.string.search_page_title)
+    override val screenTitle
+        get() = getString(R.string.search_page_title)
 
     override fun onCreateView(
         inflater: LayoutInflater,
