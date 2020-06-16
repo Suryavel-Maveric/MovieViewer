@@ -12,6 +12,5 @@ fun setImageUrl(imageView: ImageView, imageUrl: String) {
             load(imageUrl).placeholder(R.drawable.place_holder_poster)
         else
             load(R.drawable.place_holder_poster)).into(imageView)
-
     }
 }

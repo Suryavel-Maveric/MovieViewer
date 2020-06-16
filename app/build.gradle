@@ -94,4 +94,5 @@ dependencies {
 
     testImplementation group: 'io.mockk', name: 'mockk', version: '1.10.0'
     testImplementation group: 'androidx.arch.core', name: 'core-testing', version: '2.1.0'
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.14.0'
 }

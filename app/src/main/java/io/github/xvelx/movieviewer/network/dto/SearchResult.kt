@@ -24,7 +24,7 @@ data class SearchItem(
     }
 
     override fun equals(other: Any?): Boolean {
-        return other == this || (other as? SearchItem)?.titleId == this.titleId
+        return other === this || (other is SearchItem && other.titleId == titleId)
     }
 
     override fun hashCode(): Int = Objects.hashCode(this)
