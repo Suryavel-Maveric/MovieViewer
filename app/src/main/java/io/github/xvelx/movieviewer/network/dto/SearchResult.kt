@@ -5,11 +5,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
 data class SearchItem(
-    @JsonProperty("Title") val title: String,
-    @JsonProperty("Year") val year: String,
-    @JsonProperty("imdbID") val titleId: String,
-    @JsonProperty("Type") val titleType: String,
-    @JsonProperty("Poster") val posterUrl: String
+    @JsonProperty("Title") val title: String?,
+    @JsonProperty("Year") val year: String?,
+    @JsonProperty("imdbID") val titleId: String?,
+    @JsonProperty("Type") val titleType: String?,
+    @JsonProperty("Poster") val posterUrl: String?
 ) {
     companion object {
         val DIFF = object : DiffUtil.ItemCallback<SearchItem>() {
@@ -29,8 +29,8 @@ data class SearchItem(
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class SearchResult(
-    @JsonProperty("Search") val searchItems: List<SearchItem>,
-    @JsonProperty("totalResults") val totalResults: Int,
-    @JsonProperty("Response") val response: Boolean
+    @JsonProperty("Search") val searchItems: List<SearchItem?>?,
+    @JsonProperty("totalResults") val totalResults: Int?,
+    @JsonProperty("Response") val response: Boolean?
 //    @JsonProperty("Error") val error: String?
 )

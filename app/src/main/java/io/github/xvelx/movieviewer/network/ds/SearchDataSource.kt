@@ -1,17 +1,16 @@
 package io.github.xvelx.movieviewer.network.ds
 
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
-import io.github.xvelx.movieviewer.network.MvApi
 import io.github.xvelx.movieviewer.network.dto.SearchItem
-import io.reactivex.android.schedulers.AndroidSchedulers
+import io.github.xvelx.movieviewer.util.LoadingState
+import io.github.xvelx.movieviewer.vm.SearchViewModel
 
 /**
  * Paged DataSource to fetch title list on-demand.
  */
 class SearchDataSource(
-    private val query: String,
-    private val titleType: String,
-    private val mvApi: MvApi
+    private val searchViewModel: SearchViewModel
 ) :
     PageKeyedDataSource<Int, SearchItem>() {
 
@@ -20,25 +19,15 @@ class SearchDataSource(
         callback: LoadInitialCallback<Int, SearchItem>
     ) {
 
-        mvApi.searchTitle(query, titleType, pageNo = 1)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                callback.onResult(it.searchItems, null, 2)
-            }, {
-                // TODO
-                println("Error Fetching --- ${it.localizedMessage}")
-            })
+        searchViewModel.searchTitle {
+            callback.onResult(it.searchItems ?: emptyList(), null, 2)
+        }
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, SearchItem>) {
-        mvApi.searchTitle(query, titleType, pageNo = params.key)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                callback.onResult(it.searchItems, params.key + 1)
-            }, {
-                // TODO
-                println("Error Fetching --- ${it.localizedMessage}")
-            })
+        searchViewModel.searchTitle(pageNo = params.key) {
+            callback.onResult(it.searchItems ?: emptyList(), params.key + 1)
+        }
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, SearchItem>) = Unit

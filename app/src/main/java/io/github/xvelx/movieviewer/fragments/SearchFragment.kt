@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,6 +27,8 @@ class SearchFragment : BaseFragment() {
     private var searchPagedLiveData: LiveData<PagedList<SearchItem>>? = null
     private lateinit var searchListAdapter: SearchListAdapter
 
+    val searchViewModel: SearchViewModel by viewModels()
+
     override val screenTitle
         get() = getString(R.string.search_page_title)
 
@@ -34,9 +36,8 @@ class SearchFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_search, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.fragment_search, container, false)
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,6 +51,10 @@ class SearchFragment : BaseFragment() {
         configureSearchView()
 
         configureSearchTypeSlider()
+
+        searchViewModel.searchStateNotifier.observe(viewLifecycleOwner, Observer {
+            showSnackBarWithMessage(it.state.stringRes)
+        })
     }
 
     private fun configureSearchView() {
@@ -97,9 +102,9 @@ class SearchFragment : BaseFragment() {
         val query = searchView.query
         val titleType =
             (searchType.adapter.getItem(searchType.selectedItemPosition) as? SearchType)?.searchText
-        val searchViewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
 
         // New Live Data created for every search query
+        // (So fresh Paged Adapter with param gets created).
         // So removing the registered observers
         searchPagedLiveData?.removeObservers(this)
         searchPagedLiveData =

@@ -11,6 +11,12 @@
     <string name="detail_page_title">Detail</string>
     <string name="search_page_title">Search</string>
 
+    <string name="loading">LOADING…</string>
+    <string name="loaded">LOADED…</string>
+    <string name="no_movie_found">No Movie Found.</string>
+    <string name="unknown_error">Something unexpected happened.</string>
+
+
     <string-array name="title_types">
         <item>@string/title_type_all</item>
         <item>Movie</item>

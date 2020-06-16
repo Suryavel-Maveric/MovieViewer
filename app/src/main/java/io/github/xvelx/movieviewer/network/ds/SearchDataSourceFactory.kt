@@ -3,14 +3,13 @@ package io.github.xvelx.movieviewer.network.ds
 import androidx.paging.DataSource
 import io.github.xvelx.movieviewer.network.MvApi
 import io.github.xvelx.movieviewer.network.dto.SearchItem
+import io.github.xvelx.movieviewer.vm.SearchViewModel
 
 class SearchDataSourceFactory(
-    val query: String,
-    val titleType: String,
-    val mvApi: MvApi
+    private val searchViewModel: SearchViewModel
 ) :
     DataSource.Factory<Int, SearchItem>() {
 
     override fun create(): DataSource<Int, SearchItem> =
-        SearchDataSource(query, titleType, mvApi)
+        SearchDataSource(searchViewModel)
 }

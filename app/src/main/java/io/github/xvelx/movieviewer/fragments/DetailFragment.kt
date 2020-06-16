@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.xvelx.movieviewer.R
 import io.github.xvelx.movieviewer.databinding.FragmentDetailBinding
@@ -33,7 +33,7 @@ class DetailFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.getString(ARG_TITLE_ID)?.let { titleId ->
-            val viewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
+            val viewModel: DetailViewModel by viewModels()
             showLoading()
             viewModel.getTitleDetail(titleId).observe(viewLifecycleOwner, Observer { titleDetail ->
                 setData(titleDetail)
@@ -44,7 +44,6 @@ class DetailFragment : BaseFragment() {
     private fun setData(titleDetail: TitleDetail) {
         view?.let { rootView ->
             DataBindingUtil.bind<FragmentDetailBinding>(rootView)?.titleDetail = titleDetail
-
         }
         hideLoading()
     }
