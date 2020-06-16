@@ -3,6 +3,7 @@ package io.github.xvelx.movieviewer.network.dto
 import androidx.recyclerview.widget.DiffUtil
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
+import java.util.*
 
 data class SearchItem(
     @JsonProperty("Title") val title: String?,
@@ -25,6 +26,8 @@ data class SearchItem(
     override fun equals(other: Any?): Boolean {
         return other == this || (other as? SearchItem)?.titleId == this.titleId
     }
+
+    override fun hashCode(): Int = Objects.hashCode(this)
 }
 
 @JsonIgnoreProperties(ignoreUnknown = true)

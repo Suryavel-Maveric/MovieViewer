@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.ContentLoadingProgressBar
-import androidx.lifecycle.MutableLiveData
 import io.github.xvelx.movieviewer.vm.BaseViewModel
 import io.reactivex.disposables.Disposable
 
@@ -26,16 +25,4 @@ fun ContentLoadingProgressBar.start() {
 fun ContentLoadingProgressBar.stop() {
     visibility = View.GONE
     hide()
-}
-
-fun MutableLiveData<LoadingState>.loading() {
-//    value = LoadingState(State.LOADING)
-}
-
-fun MutableLiveData<LoadingState>.loaded() {
-//    value = LoadingState(State.LOADED)
-}
-
-fun MutableLiveData<LoadingState>.error() {
-//    value = LoadingState(State.ERROR)
 }

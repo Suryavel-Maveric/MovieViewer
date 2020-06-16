@@ -91,4 +91,7 @@ dependencies {
 
     // Mock
     testImplementation group: 'com.squareup.retrofit2', name: 'retrofit-mock', version: '2.9.0'
+
+    testImplementation group: 'io.mockk', name: 'mockk', version: '1.10.0'
+    testImplementation group: 'androidx.arch.core', name: 'core-testing', version: '2.1.0'
 }
