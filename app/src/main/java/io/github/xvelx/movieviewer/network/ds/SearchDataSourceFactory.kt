@@ -1,7 +1,6 @@
 package io.github.xvelx.movieviewer.network.ds
 
 import androidx.paging.DataSource
-import io.github.xvelx.movieviewer.network.MvApi
 import io.github.xvelx.movieviewer.network.dto.SearchItem
 import io.github.xvelx.movieviewer.vm.SearchViewModel
 

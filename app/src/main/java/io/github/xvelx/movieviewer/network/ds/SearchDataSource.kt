@@ -1,9 +1,7 @@
 package io.github.xvelx.movieviewer.network.ds
 
-import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import io.github.xvelx.movieviewer.network.dto.SearchItem
-import io.github.xvelx.movieviewer.util.LoadingState
 import io.github.xvelx.movieviewer.vm.SearchViewModel
 
 /**

@@ -49,10 +49,15 @@ class SearchViewModel @ViewModelInject constructor(
     @WorkerThread
     fun searchTitle(pageNo: Int = 1, onNewSearchResult: (SearchResult) -> Unit) {
         searchStateNotifier.postValue(LoadingState(State.LOADING))
-        mvApi.searchTitle(persistedQuery!!, persistedType!!, pageNo)
-            .execute().body()?.let(onNewSearchResult)
-        searchStateNotifier.postValue(LoadingState(State.LOADED))
+        val searchResponse = mvApi.searchTitle(persistedQuery!!, persistedType!!, pageNo)
+            .execute().body()
+        when {
+            searchResponse == null -> searchStateNotifier.postValue(LoadingState(State.ERROR))
+            searchResponse.response == false -> searchStateNotifier.postValue(LoadingState(State.NO_RECORD_FOUND))
+            searchResponse.response == true -> {
+                onNewSearchResult(searchResponse)
+                searchStateNotifier.postValue(LoadingState(State.LOADED))
+            }
+        }
     }
-
-
 }

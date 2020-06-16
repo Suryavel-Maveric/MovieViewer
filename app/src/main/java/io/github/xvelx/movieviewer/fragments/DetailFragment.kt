@@ -11,6 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.github.xvelx.movieviewer.R
 import io.github.xvelx.movieviewer.databinding.FragmentDetailBinding
 import io.github.xvelx.movieviewer.network.dto.TitleDetail
+import io.github.xvelx.movieviewer.util.State
 import io.github.xvelx.movieviewer.vm.DetailViewModel
 
 @AndroidEntryPoint
@@ -36,7 +37,11 @@ class DetailFragment : BaseFragment() {
             val viewModel: DetailViewModel by viewModels()
             showLoading()
             viewModel.getTitleDetail(titleId).observe(viewLifecycleOwner, Observer { titleDetail ->
-                setData(titleDetail)
+                if (titleDetail == null) {
+                    showSnackBarWithMessage(State.ERROR.stringRes)
+                } else {
+                    setData(titleDetail)
+                }
             })
         }
     }

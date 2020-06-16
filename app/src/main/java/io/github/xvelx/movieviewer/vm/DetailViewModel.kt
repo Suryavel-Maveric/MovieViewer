@@ -10,14 +10,14 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 
 class DetailViewModel @ViewModelInject constructor(private val mvApi: MvApi) : BaseViewModel() {
 
-    private val detailLiveData = MutableLiveData<TitleDetail>()
+    private val detailLiveData = MutableLiveData<TitleDetail?>()
 
-    fun getTitleDetail(titleId: String): LiveData<TitleDetail> {
+    fun getTitleDetail(titleId: String): LiveData<TitleDetail?> {
         mvApi.getTitle(titleId).observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 detailLiveData.value = it
             }, {
-                println(it.localizedMessage)
+                detailLiveData.value = null
             }).addToDisposableBucket(this)
         return detailLiveData
     }
